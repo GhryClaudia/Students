@@ -1,6 +1,6 @@
 package ro.ulbs.proiectaresoftware.students;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 public class Application {
     public static void main() {
         Student s1= new Student(112, "Ioan", "Popa", "TI21/1");
@@ -38,6 +38,22 @@ public class Application {
         else
             System.out.println("Nu exista acest student");
         if(exista2==1)
+            System.out.println("Exista student 2");
+        else
+            System.out.println("Nu exista acest student");
+        Set<Student> setS=new HashSet<Student>();
+        setS.add(s1);
+        setS.add(s2);
+        setS.add(s3);
+        setS.add(s4);
+        setS.add(s5);
+        boolean contine=setS.contains(student1);
+        if(contine==true)
+            System.out.println("Exista student 1");
+        else
+            System.out.println("Nu exista acest student");
+        contine=setS.contains(student2);
+        if(contine==true)
             System.out.println("Exista student 2");
         else
             System.out.println("Nu exista acest student");
