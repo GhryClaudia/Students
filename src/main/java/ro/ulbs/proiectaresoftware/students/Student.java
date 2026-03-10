@@ -35,4 +35,11 @@ public class Student
 //                '}';
         return String.format("%14d %20s %8s", numarmatricol, prenume+" "+nume, formatieDeStudiu);
     }
+    public boolean ExistaStudent(Student s)
+    {
+        if(this.prenume==s.prenume && this.nume==s.nume && this.formatieDeStudiu==s.formatieDeStudiu)
+            return true;
+        else
+            return false;
+    }
 }
