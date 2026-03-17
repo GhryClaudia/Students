@@ -92,6 +92,17 @@ public class Application {
         catch (IOException e) {
             e.printStackTrace();
         }
-
+        listout.clear();
+        listS.sort(Comparator.comparing(Student::getFormatieDeStudiu));
+        listS.sort(Comparator.comparing(Student::getNume));
+        for(Student s:listS)
+            listout.add(s.Sir());
+        try {
+            Path path = Paths.get("studenti_out_sorted.txt");
+            Files.write(path, listout);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
