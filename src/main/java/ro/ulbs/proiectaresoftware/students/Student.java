@@ -60,4 +60,7 @@ public class Student
     public int hashCode() {
         return Objects.hash(numarmatricol, prenume, nume, formatieDeStudiu);
     }
+    public String Sir(){
+        return String.valueOf(numarmatricol)+" "+prenume+" "+nume+" "+formatieDeStudiu;
+    }
 }

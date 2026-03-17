@@ -1,9 +1,15 @@
 package ro.ulbs.proiectaresoftware.students;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Application {
     public static void main() {
-        Student s1= new Student(112, "Ioan", "Popa", "TI21/1");
+       /* Student s1= new Student(112, "Ioan", "Popa", "TI21/1");
         Student s2= new Student(112, "Maria", "Oprea", "TI21/1");
         Student s3= new Student(120, "Alis", "Popa", "TI21/2");
         Student s4= new Student(122, "Mihai", "Vecerdea", "TI22/1");
@@ -56,6 +62,36 @@ public class Application {
         if(contine==true)
             System.out.println("Exista student 2");
         else
-            System.out.println("Nu exista acest student");
+            System.out.println("Nu exista acest student");*/
+        File f=new File("studenti_in.txt");
+        Scanner sc=null;
+        List<Student> listS=new ArrayList<Student>();
+        String studenti;
+        try{
+            sc=new Scanner(f);
+        }
+        catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        while(sc.hasNextLine())
+        {
+            studenti=sc.nextLine();
+            String[] campuri=studenti.split(",");
+            int nr=Integer.parseInt(campuri[0]);
+            Student s=new Student(nr,campuri[1],campuri[2],campuri[3]);
+            listS.add(s);
+        }
+        listS.sort(Comparator.comparing(Student::getNume));
+        List<String> listout=new ArrayList<>();
+        for(Student s:listS)
+            listout.add(s.Sir());
+        try {
+            Path path = Paths.get("studenti_out.txt");
+            Files.write(path, listout);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
