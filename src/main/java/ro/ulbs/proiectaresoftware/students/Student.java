@@ -8,6 +8,7 @@ public class Student
     private String prenume;
     private String nume;
     private String formatieDeStudiu;
+    private float nota;
     public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu) {
         this.numarmatricol = numarmatricol;
         this.prenume = prenume;
@@ -26,16 +27,17 @@ public class Student
     public String getFormatieDeStudiu() {
         return formatieDeStudiu;
     }
+    public void setNota(float n) {nota=n;}
     @Override
     public String toString() {
 
-//        return "Student{" +
-//                "numarmatricol=" + numarmatricol +
-//                ", prenume='" + prenume + '\'' +
-//                ", nume='" + nume + '\'' +
-//                ", formatieDeStudiu='" + formatieDeStudiu + '\'' +
-//                '}';
-        return String.format("%14d %20s %8s", numarmatricol, prenume+" "+nume, formatieDeStudiu);
+        return "Student{" +
+                "numarmatricol=" + numarmatricol +
+               ", prenume='" + prenume + '\'' +
+               ", nume='" + nume + '\'' +
+               ", formatieDeStudiu='" + formatieDeStudiu + ", nota=" + nota + '\'' +
+               '}';
+        //return String.format("%14d %20s %8 ", numarmatricol, prenume+" "+nume, formatieDeStudiu);
     }
     public boolean ExistaStudent(Student s)
     {
@@ -54,13 +56,15 @@ public class Student
         return numarmatricol == student.numarmatricol &&
                 Objects.equals(prenume, student.prenume) &&
                 Objects.equals(nume, student.nume) &&
-                Objects.equals(formatieDeStudiu, student.formatieDeStudiu);
+                Objects.equals(formatieDeStudiu, student.formatieDeStudiu) &&
+                Objects.equals(nota, student.nota);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(numarmatricol, prenume, nume, formatieDeStudiu);
+        return Objects.hash(numarmatricol, prenume, nume, formatieDeStudiu, nota);
     }
     public String Sir(){
         return String.valueOf(numarmatricol)+" "+prenume+" "+nume+" "+formatieDeStudiu;
     }
+
 }
