@@ -125,6 +125,19 @@ public class Application {
         for (Student s : mapStudenti.values()) {
             System.out.println(s);
         }
+        System.out.println();
+        float notaM = gasesteNota("Bianca", "Popescu", mapStudenti);
+        float notaN = gasesteNota("Ioan", "Mihalcea", mapStudenti);
+        System.out.println(notaM+" "+notaN);
 
+    }
+    public static float gasesteNota(String p, String n,  Map<Integer, Student> map)
+    {
+        for(Student s : map.values())
+        {
+            if(s.getPrenume().equals(p) && s.getNume().equals(n))
+                return s.getNota();
+        }
+        return 0;
     }
 }

@@ -1,5 +1,6 @@
 package ro.ulbs.proiectaresoftware.students;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Student
@@ -27,6 +28,7 @@ public class Student
     public String getFormatieDeStudiu() {
         return formatieDeStudiu;
     }
+    public float getNota() {return nota;}
     public void setNota(float n) {nota=n;}
     @Override
     public String toString() {
@@ -66,5 +68,6 @@ public class Student
     public String Sir(){
         return String.valueOf(numarmatricol)+" "+prenume+" "+nume+" "+formatieDeStudiu;
     }
+
 
 }
