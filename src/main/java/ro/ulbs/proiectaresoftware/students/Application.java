@@ -95,12 +95,7 @@ public class Application {
         listS.sort(Comparator.comparing(Student::getNume));
         for (Student s : listS)
             listout.add(s.Sir());
-        try {
-            Path path = Paths.get("studenti_out_sorted.txt");
-            Files.write(path, listout);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        scriefisier("studenti_out_sorted.txt", listout);
         Map<Integer, Student> mapStudenti = new HashMap<>();
         for (Student s : listS)
             mapStudenti.put(s.getNumarmatricol(), s);
@@ -126,12 +121,20 @@ public class Application {
             System.out.println(s);
         }
         System.out.println();
-        float notaM = gasesteNota("Bianca", "Popescu", mapStudenti);
-        float notaN = gasesteNota("Ioan", "Mihalcea", mapStudenti);
+        double notaM = gasesteNota("Bianca", "Popescu", mapStudenti);
+        double notaN = gasesteNota("Ioan", "Mihalcea", mapStudenti);
         System.out.println(notaM+" "+notaN);
-
+        List<StudentiBursieri> bursieri = new ArrayList<StudentiBursieri>();
+        bursieri.add( new StudentiBursieri(1025,"Andrei","Popa","ISM141/2", (float)8.70, 725.50));
+        bursieri.add( new StudentiBursieri(1024,"Ioan","Mihalcea","ISM141/1", 9.80, 801.10));
+        bursieri.add( new StudentiBursieri(1026,"Anamaria","Prodan","TI131/1", 8.90, 745.50));
+        bursieri.add( new StudentiBursieri(1029,"Bianca","Popescu","TI131/1,", 9.10, 780.80));
+        List<String> bursieriout = new ArrayList<>();
+        for (StudentiBursieri s : bursieri)
+            bursieriout.add(s.Sir());
+        scriefisier("bursieri_out.txt",bursieriout);
     }
-    public static float gasesteNota(String p, String n,  Map<Integer, Student> map)
+    public static double gasesteNota(String p, String n,  Map<Integer, Student> map)
     {
         for(Student s : map.values())
         {
@@ -139,5 +142,14 @@ public class Application {
                 return s.getNota();
         }
         return 0;
+    }
+    public static void scriefisier(String nume, List<String> lista)
+    {
+        try {
+            Path path = Paths.get(nume);
+            Files.write(path, lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

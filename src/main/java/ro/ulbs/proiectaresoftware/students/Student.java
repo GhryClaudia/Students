@@ -9,12 +9,19 @@ public class Student
     private String prenume;
     private String nume;
     private String formatieDeStudiu;
-    private float nota;
+    private double nota;
     public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu) {
         this.numarmatricol = numarmatricol;
         this.prenume = prenume;
         this.nume = nume;
         this.formatieDeStudiu = formatieDeStudiu;
+    }
+    public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu, double nota) {
+        this.numarmatricol = numarmatricol;
+        this.prenume = prenume;
+        this.nume = nume;
+        this.formatieDeStudiu = formatieDeStudiu;
+        this.nota = nota;
     }
     public int getNumarmatricol() {
         return numarmatricol;
@@ -28,7 +35,7 @@ public class Student
     public String getFormatieDeStudiu() {
         return formatieDeStudiu;
     }
-    public float getNota() {return nota;}
+    public double getNota() {return nota;}
     public void setNota(float n) {nota=n;}
     @Override
     public String toString() {
