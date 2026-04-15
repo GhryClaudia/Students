@@ -10,6 +10,9 @@ public class StudentiBursieri extends Student
         super(numarmatricol, prenume, nume, formatieDeStudiu,nota);
         this.cuantumBursa = cuantumBursa;
     }
+    public double getCuantumBursa() {
+        return cuantumBursa;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
