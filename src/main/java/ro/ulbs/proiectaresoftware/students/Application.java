@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
        /* Student s1= new Student(112, "Ioan", "Popa", "TI21/1");
         Student s2= new Student(112, "Maria", "Oprea", "TI21/1");
         Student s3= new Student(120, "Alis", "Popa", "TI21/2");
@@ -63,7 +64,7 @@ public class Application {
             System.out.println("Exista student 2");
         else
             System.out.println("Nu exista acest student");*/
-        File f = new File("studenti_in.txt");
+        /*File f = new File("studenti_in.txt");
         Scanner sc = null;
         List<Student> listS = new ArrayList<Student>();
         String studenti;
@@ -132,8 +133,33 @@ public class Application {
         List<String> bursieriout = new ArrayList<>();
         for (StudentiBursieri s : bursieri)
             bursieriout.add(s.Sir());
-        scriefisier("bursieri_out.txt",bursieriout);
+        scriefisier("bursieri_out.txt",bursieriout);*/
+        Student s1= new Student(112, "Ioan", "Popa", "TI21/2",9.8);
+        Student s2= new Student(112, "Maria", "Oprea", "TI21/1",7.4);
+        Student s3= new Student(120, "Alis", "Popa", "TI21/1",3.9);
+        Student s4= new Student(122, "Mihai", "Vecerdea", "TI22/2",8.2);
+        Student s5= new Student(122, "Eugen", "Uritescu", "TI22/1",9.5);
+        Student s6= new Student(172, "Elena", "Pop", "TI21/1",6.8);
+        List<Student> list=new ArrayList<Student>();
+        list.add(s1);
+        list.add(s2);
+        list.add(s3);
+        list.add(s4);
+        list.add(s5);
+        list.add(s6);
+        List<Student> list1=new ArrayList<Student>();
+        List<Student> list2=new ArrayList<Student>();
+        Student.imparte(list,list1,list2,"TI212","TI211");
+        for(Student s: list)
+            System.out.println(s);
+        System.out.println();
+        for(Student s: list1)
+            System.out.println(s);
+        System.out.println();
+        for(Student s: list2)
+            System.out.println(s);
     }
+
     public static double gasesteNota(String p, String n,  Map<Integer, Student> map)
     {
         for(Student s : map.values())

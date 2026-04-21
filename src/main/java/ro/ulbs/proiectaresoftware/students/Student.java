@@ -1,21 +1,23 @@
 package ro.ulbs.proiectaresoftware.students;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class Student
 {
-    private int numarmatricol;
-    private String prenume;
-    private String nume;
+    private final int numarmatricol;
+    private final String prenume;
+    private final String nume;
     private String formatieDeStudiu;
-    private double nota;
-    public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu) {
-        this.numarmatricol = numarmatricol;
-        this.prenume = prenume;
-        this.nume = nume;
-        this.formatieDeStudiu = formatieDeStudiu;
-    }
+    private final double nota;
+//    public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu) {
+//        this.numarmatricol = numarmatricol;
+//        this.prenume = prenume;
+//        this.nume = nume;
+//        this.formatieDeStudiu = formatieDeStudiu;
+//    }
     public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu, double nota) {
         this.numarmatricol = numarmatricol;
         this.prenume = prenume;
@@ -36,7 +38,6 @@ public class Student
         return formatieDeStudiu;
     }
     public double getNota() {return nota;}
-    public void setNota(float n) {nota=n;}
     @Override
     public String toString() {
 
@@ -75,6 +76,23 @@ public class Student
     public String Sir(){
         return String.valueOf(numarmatricol)+" "+prenume+" "+nume+" "+formatieDeStudiu;
     }
+    public static Student schimbaFormatiaDeStudiu(Student s, String formatieNoua)
+    {
+        if(s.formatieDeStudiu.compareTo(formatieNoua)!=0)
+            s.formatieDeStudiu=formatieNoua;
+        return s;
+    }
+    public static void imparte(List<Student> studenti, List<Student> list1, List<Student> list2,String formatie1,String formatie2) {
+        for (int i = 0; i < studenti.size()/2; i++) {
+            Student s1 = studenti.get(i);
+            s1.schimbaFormatiaDeStudiu(s1, formatie1);
+            list1.add(s1);
+        }
+        for (int i = studenti.size()/2; i < studenti.size(); i++) {
+            Student s2 = studenti.get(i);
+            s2.schimbaFormatiaDeStudiu(s2, formatie2);
+            list2.add(s2);
+        }
 
-
+    }
 }
