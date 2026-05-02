@@ -1,15 +1,17 @@
 package ro.ulbs.proiectaresoftware.students;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
 public class Application {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
        /* Student s1= new Student(112, "Ioan", "Popa", "TI21/1");
         Student s2= new Student(112, "Maria", "Oprea", "TI21/1");
         Student s3= new Student(120, "Alis", "Popa", "TI21/2");
@@ -158,6 +160,90 @@ public class Application {
         System.out.println();
         for(Student s: list2)
             System.out.println(s);
+        ScrieExcel(list);
+        List<Student> listaStudenti = CitesteExcel();
+        for(Student s: listaStudenti)
+            System.out.println(s);
+    }
+    public static List CitesteExcel() throws IOException {
+        List<Student> listaStudenti = new ArrayList<>();
+        FileInputStream file = new FileInputStream(new File("laborator8_students.xlsx"));
+
+//Create Workbook instance holding reference to .xlsx file
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+//Get first/desired sheet from the workbook
+        XSSFSheet sheet = workbook.getSheetAt(0);
+
+//Iterate through each rows one by one
+        Iterator<Row> rowIterator = sheet.iterator();
+        if (rowIterator.hasNext()) {
+            rowIterator.next();
+        }
+        while (rowIterator.hasNext()) {
+
+            Row row = rowIterator.next();
+            int numarMatricol = (int) row.getCell(0).getNumericCellValue();
+            String prenume = row.getCell(1).getStringCellValue();
+            String nume = row.getCell(2).getStringCellValue();
+            String formatie = row.getCell(3).getStringCellValue();
+            double nota = row.getCell(4).getNumericCellValue();
+
+            Student student = new Student(numarMatricol, prenume, nume, formatie, nota);
+
+            listaStudenti.add(student);
+            }
+        workbook.close();
+        file.close();
+        return listaStudenti;
+    }
+
+    public static void ScrieExcel(List <Student> list)
+    {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+//Create a blank sheet
+
+        XSSFSheet sheet = workbook.createSheet("Studenti");
+
+//Prepare data to be written as an Object[]
+
+        Map<String, Object[]> data = new TreeMap<String, Object[]>();
+        data.put("1", new Object[] {"NUMAR MATRICOL", "PRENUME", "NUME", "FORMATIE DE STUDIU", "NOTA"});
+        int i=2;
+        for (Student s: list)
+            data.put(String.valueOf(i++),new Object[] {s.getNumarmatricol(),s.getPrenume(),s.getNume(),s.getFormatieDeStudiu(),s.getNota()});
+
+
+//Iterate over data and write to sheet
+
+        Set<String> keyset = data.keySet();
+        int rownum = 0;
+        for (String key : keyset) {
+
+            Row row = sheet.createRow(rownum++);
+            Object [] objArr = data.get(key);
+            int cellnum = 0;
+            for (Object obj : objArr)
+            {
+                Cell cell = row.createCell(cellnum++);
+                if (obj instanceof String)
+                    cell.setCellValue((String) obj);
+                else if (obj instanceof Integer)
+                    cell.setCellValue((Integer) obj);
+                else if (obj instanceof Double)
+                    cell.setCellValue((Double) obj);
+            }
+        }
+//Write the workbook in file system
+        try {
+            FileOutputStream out = new FileOutputStream(new File("laborator8_students.xlsx"));
+            workbook.write(out);
+            out.close();
+            System.out.println("laborator8_students.xlsx written successfully on disk.");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static double gasesteNota(String p, String n,  Map<Integer, Student> map)
