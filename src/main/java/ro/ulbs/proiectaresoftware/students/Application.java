@@ -136,7 +136,7 @@ public class Application {
         for (StudentiBursieri s : bursieri)
             bursieriout.add(s.Sir());
         scriefisier("bursieri_out.txt",bursieriout);*/
-        Student s1= new Student(112, "Ioan", "Popa", "TI21/2",9.8);
+        /*Student s1= new Student(112, "Ioan", "Popa", "TI21/2",9.8);
         Student s2= new Student(112, "Maria", "Oprea", "TI21/1",7.4);
         Student s3= new Student(120, "Alis", "Popa", "TI21/1",3.9);
         Student s4= new Student(122, "Mihai", "Vecerdea", "TI22/2",8.2);
@@ -195,7 +195,42 @@ public class Application {
             }
         workbook.close();
         file.close();
-        return listaStudenti;
+        return listaStudenti;*/
+        List<Student> studentiCuNote = Arrays.asList(
+                new Student(1025,"Andrei","Popa","ISM141/2", 8.70),
+                new Student(1024,"Ioan","Mihalcea","ISM141/1", 10),
+                new Student(1026,"Anamaria","Prodan","TI131/1", 8.90),
+                new Student(1029,"Bianca","Popescu","TI131/1,", 10),
+                new Student(1029,"Maria","Pana","TI131/2,", 4.10),
+                new Student(1029,"Gabriela","Mohanu","TI131/2,", 7.33),
+                new Student(1029,"Marius","Nasta","TI131/2,", 3.20),
+                new Student(1029,"Marius","Nasta","TI131/1,", 5.12),
+                new Student(1029,"Andrei","Dobrescu","TI131/2,", 2.22)
+        );
+        List<Student> studentiCuNota10= studentiCuNote.stream()
+                .filter(s->s.getNota()==10)
+                .toList();
+        List<Student> studentiSub5=studentiCuNote.stream()
+                .filter(s->s.getNota()<5)
+                .toList();
+        List<Student> nota4=studentiCuNote.stream()
+                .map(s -> new Student(
+                        s.getNumarmatricol(),
+                        s.getNume(),
+                        s.getPrenume(),
+                        s.getFormatieDeStudiu(),
+                        s.getNota() < 4 ? 4 : s.getNota()
+                ))
+                .toList();
+        double suma=studentiCuNote.stream()
+                .map(Student::getNota)
+                .reduce(0.0, Double::sum);
+        double medie=suma / studentiCuNote.size();
+        System.out.println("Studentii cu nota 10 "+studentiCuNota10);
+        System.out.println("Studentii cu nota sub 5 "+studentiSub5);
+        System.out.println("Studentii nota 4 "+nota4);
+        System.out.println("Suma notelor "+suma);
+        System.out.println("Media notelor "+medie);
     }
 
     public static void ScrieExcel(List <Student> list)
