@@ -10,7 +10,7 @@ public class Student
     private final int numarmatricol;
     private final String prenume;
     private final String nume;
-    private String formatieDeStudiu;
+    private final String formatieDeStudiu;
     private final double nota;
 //    public Student(int numarmatricol, String prenume, String nume, String formatieDeStudiu) {
 //        this.numarmatricol = numarmatricol;
@@ -78,21 +78,24 @@ public class Student
     }
     public static Student schimbaFormatiaDeStudiu(Student s, String formatieNoua)
     {
-        if(s.formatieDeStudiu.compareTo(formatieNoua)!=0)
-            s.formatieDeStudiu=formatieNoua;
-        return s;
+        return new Student(
+                s.getNumarmatricol(),
+                s.getPrenume(),
+                s.getNume(),
+                formatieNoua,
+                s.getNota()
+        );
     }
-    public static void imparte(List<Student> studenti, List<Student> list1, List<Student> list2,String formatie1,String formatie2) {
-        for (int i = 0; i < studenti.size()/2; i++) {
-            Student s1 = studenti.get(i);
-            s1.schimbaFormatiaDeStudiu(s1, formatie1);
-            list1.add(s1);
-        }
-        for (int i = studenti.size()/2; i < studenti.size(); i++) {
-            Student s2 = studenti.get(i);
-            s2.schimbaFormatiaDeStudiu(s2, formatie2);
-            list2.add(s2);
-        }
+    public static void imparte(List<Student> studenti, List<Student> list1, List<Student> list2, String formatie1, String formatie2) {
+        int jumatate = (studenti.size() + 1) / 2;  // în caz de impar, prima listă are 1 în plus
 
+        for (int i = 0; i < jumatate; i++) {
+            Student s = studenti.get(i);
+            list1.add(schimbaFormatiaDeStudiu(s, formatie1));
+        }
+        for (int i = jumatate; i < studenti.size(); i++) {
+            Student s = studenti.get(i);
+            list2.add(schimbaFormatiaDeStudiu(s, formatie2));
+        }
     }
 }

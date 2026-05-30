@@ -160,7 +160,7 @@ public class Application {
         System.out.println();
         for(Student s: list2)
             System.out.println(s);
-        ScrieExcel(list);
+        scrieExcel(list);
         List<Student> listaStudenti = CitesteExcel();
         for(Student s: listaStudenti)
             System.out.println(s);
@@ -233,7 +233,7 @@ public class Application {
         System.out.println("Media notelor "+medie);
     }
 
-    public static void ScrieExcel(List <Student> list)
+    public static void scrieExcel(List <Student> list)
     {
         XSSFWorkbook workbook = new XSSFWorkbook();
 //Create a blank sheet
